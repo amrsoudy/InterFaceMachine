@@ -1,16 +1,112 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+﻿<html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+        <script>
+
+
+            function getData() {
+
+            
+                //this.x = x;
+                //this.y = y;
+
+                document.getElementById('bAdd').onclick = function () {
+                    var x = parseInt(document.getElementById('nb1').value);
+                    var y = parseInt(document.getElementById('nb2').value);
+                    document.getElementById('res').value = (x+y);
+                }
+                document.getElementById('bSous').onclick = function () {
+                    var x = document.getElementById('nb1').value;
+                    var y = document.getElementById('nb2').value;
+                    document.getElementById('res').value = x - y;
+                }
+                document.getElementById('bMult').onclick = function () {
+                    var x = document.getElementById('nb1').value;
+                    var y = document.getElementById('nb2').value;
+                    document.getElementById('res').value = x * y;
+                }
+                document.getElementById('bDiv').onclick = function () {
+                    var x = document.getElementById('nb1').value;
+                    var y = document.getElementById('nb2').value;
+                    document.getElementById('res').value = x / y;
+                }
+
+
+            }
+
+            window.onload = getData;
+
+        </script>
+
     </head>
     <body>
-        <div>TODO write content</div>
+
+        <div class="container-fluid bg-3 text-center">    
+
+            <div class="row">
+                <div class="col-sm-2" id="menu">
+                </div>
+                <div class="col-sm-10" id="main">
+                    <div class="row">
+                        <div class="col-sm-8" id="form1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h2>Calculateur arithmétique</h2></div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-sm-offset-2">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="nb1">
+                                                <label for="nb1">Nombre 1</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-sm-offset-2">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="nb2">
+                                                <label for="nb2">Nombre 2</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2 col-sm-offset-2">
+                                            <div class="form-group">
+                                                <input type="button" class="form-control btn btn-primary active" id="bAdd" value="+" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input type="button" class="form-control btn btn-primary active" id="bSous" value="-" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input type="button" class="form-control btn btn-primary active" id="bMult" value="*" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <input type="button" class="form-control btn btn-primary active" id="bDiv" value="/" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3 col-sm-offset-2">
+                                            <div class="form-group">
+                                                <label for="rAddAjustee" style="margin-top:10px">Résultat : </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4" style="background-color">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control saisie1" readonly id="res">							
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
     </body>
 </html>
