@@ -31,7 +31,25 @@
             var by = 3;//3
             var x;
             var y;
-            var tabFinal = ["im23", "im32", "im21", "im12", "im31", "im11", "im13", "im22", "im33"];
+            /* var tabFinal = ["./images/Image1.gif", "./images/Image2.gif","./images/Image3.gif",
+             "./images/Image4.gif","./images/Image5.gif",
+             "./images/Image6.gif", "./images/Image7.gif", 
+             "./images/Image8.gif","./images/Image9.gif",
+             "./images/Blanc.gif"];*/
+
+            var tabFinal = [
+                "http://localhost:8383/game1/images/Image1.gif",
+                "http://localhost:8383/game1/images/Image2.gif",
+                "http://localhost:8383/game1/images/Image3.gif",
+                "http://localhost:8383/game1/images/Image4.gif",
+                "http://localhost:8383/game1/images/Image5.gif",
+                "http://localhost:8383/game1/images/Image6.gif",
+                "http://localhost:8383/game1/images/Image7.gif",
+                "http://localhost:8383/game1/images/Image8.gif",
+                "http://localhost:8383/game1/images/Blanc.gif"
+            ];
+
+
             function f(x, y) {
                 var TempScr = document.getElementsByName("im" + x + y)[0].src;
                 var TempBlancSrc = document.getElementsByName("im" + bx + by)[0].src;
@@ -47,34 +65,37 @@
                     by = tempy;
 
                     var tabcourent = [];
-                    ;
 
 
                     for (i = 0; i < 9; i++) {
-                        var tab = document.images[i].name;
+                        var tab = document.images[i].src;
+
+
                         //alert(tab);
 
                         tabcourent.push(tab);
+                        // alert(tabcourent[0]);
 
                     }
-                    //alert(tabcourent);
+                     var bool = tabcourent.every(function (element, index) {
+                    return element === tabFinal[index];
+                });
 
-                    var bool = tabcourent.every(function (element, index) {
-                        return element === tabFinal[index];
-                    });
+                if (bool == true) {
 
-                    if (bool == true) {
+                    alert("Congratulation");
 
-                        alert("Congratulation");
-
-                    }
+                }
 
 
                 }
-         
+               
+
 
 
             }
+
+
 
 
         </script>
