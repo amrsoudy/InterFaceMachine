@@ -31,11 +31,7 @@
             var by = 3;//3
             var x;
             var y;
-            /* var tabFinal = ["./images/Image1.gif", "./images/Image2.gif","./images/Image3.gif",
-             "./images/Image4.gif","./images/Image5.gif",
-             "./images/Image6.gif", "./images/Image7.gif", 
-             "./images/Image8.gif","./images/Image9.gif",
-             "./images/Blanc.gif"];*/
+      
 
             var tabFinal = [
                 "http://localhost:8383/game1/images/Image1.gif",
@@ -74,9 +70,9 @@
                         //alert(tab);
 
                         tabcourent.push(tab);
-                        // alert(tabcourent[0]);
-
+                 
                     }
+					alert(tabcourent);
                      var bool = tabcourent.every(function (element, index) {
                     return element === tabFinal[index];
                 });
