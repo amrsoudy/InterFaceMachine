@@ -1,0 +1,8 @@
+{
+    "name": "exo3_clic_efface",
+    "version": "1.0.0",
+    "keywords": ["util", "functional", "server", "client", "browser"],
+    "author": "AMR",
+    "contributors": [],
+    "dependencies": {}
+}

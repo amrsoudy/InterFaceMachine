@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>JavaScript - Images</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    </head>
+    <body>
+        <button onclick="ActiveDesActive()">Activer/Désactiver les liens</button>
+        <p>
+            Et effectivement les <a id="lien1"  href='http://www.pensezcybersecurite.gc.ca/cnt/prtct-yrslf/prtctn-dntty/usng-psswrds-fra.aspx'>mots de passe</a> présentent des failles. Ou, plus exactement, la façon dont nous les utilisons. Nous en choisissons de trop simples, oublions les plus complexes, les partageons avec nos collègues ou nos subordonnés, ou avec quiconque exerce une forme d'autorité. Une étude d'IS Decisions révèle que pas moins de 23 % des utilisateurs américains et britanniques partagent leurs mots de passe professionnels avec un ou plusieurs collègues.
+        </p>
+        <p>
+            Il n'est donc pas étonnant que les technologies de nouvelle génération en matière de sécurité informatique paraissent séduisantes, en particulier la <a href="http://fr.wikipedia.org/wiki/Biom%C3%A9trie">biométrie</a> dont les avantages peuvent apparaître comme intéressants.
+            Impossible en effet d'oublier notre empreinte digitale ou rétinienne. Tout utilisateur d'un <a href="https://www.apple.com/ca/fr/iphone/">iPhone</a> récent sait combien il est facile de déverrouiller son portable ou de payer une application au moyen de son empreinte digitale. La procédure est à la fois sécurisée et très simple, rendant l'authentification facile et fluide
+        </p>
+        <p>
+            Mais cette fluidité ne constitue pas nécessairement un avantage réel dans le domaine de la sécurité des réseaux. Fondamentalement, la biométrie constitue une approche différente de celle des mots de passe. Alors qu'un mot de passe est un élément que l'utilisateur connaît, un marqueur biométrique est un élément qui le caractérise. On peut également évoquer les tokens (« jetons ») physiques, ou les clés, des éléments que l'utilisateur possède.
+        </p>
+        <p>
+            Chaque méthode possède ses propres avantages et inconvénients et, s'il est certes difficile de partager une empreinte digitale, il est étonnamment facile de leurrer un lecteur d'empreintes digitales ou de reconnaissance rétinienne, comme l'ont récemment démontré les hackers du <a href="http://www.ccc.de/en/">Chaos Computer Club</a>. 
+        </p>
+        <p>
+            L'autre inconvénient de la biométrie est la lourdeur, et donc la lenteur prévisible, de son déploiement en entreprise. Les entreprises sont aujourd'hui beaucoup plus réticentes à adopter les nouvelles technologies que le grand public, et il n'y a aucune raison de penser qu'il en sera différemment pour la biométrie.
+        </p>
+        <p>
+            Les technologies de sécurité biométrique ont été encore relativement peu testées à grande échelle et seront coûteuses à mettre en ouvre. Il coulera donc beaucoup d'eau sous les ponts avant que même les entreprises les plus soucieuses de sécurité n'envisagent de les déployer massivement.
+        </p>
+        <p>
+            Et cela ne constitue pas un réel problème. La biométrie a peut-être de beaux jours, bien que lointains, devant elle mais, pour l'instant, il reste beaucoup à faire pour renforcer la sécurité offerte par les mots de passe.
+            Les mots de passe, comme la biométrie, ne sont qu'une mesure de sécurité parmi d'autres et aucune d'entre elles n'assure la sécurité à 100 %. La bonne approche dans ce domaine consiste toujours à prendre l'ensemble des mesures appropriées pour atténuer tous les risques possibles. Cela peut signifier une approche au cas par cas, de la même manière qu'un niveau de sécurité différent s'applique à votre porte d'entrée et à la salle des coffres de votre banque.
+        </p>
+        <script>
+             var  count =0 ;
+            
+            function ActiveDesActive() {
+
+              count++;
+                if (count === 1) {
+                    alert("all links DisActivated");
+                      
+                    var all = document.getElementsByTagName("a");
+                    for (var i = 0; i < all.length; i++) {
+
+                        all[i].onclick =  function fun() {
+                            return (false);
+
+                        };
+                       
+                }
+                  
+
+                    }else if (count === 2) {
+                    alert("All Links  Activated ");
+                    count = 0;
+                       var all = document.getElementsByTagName("a");
+                    for (var i = 0; i < all.length; i++) {
+
+                        all[i].onclick =  function fun() {
+                            return (true);
+
+                        };
+
+
+                }
+
+                }
+
+                  
+    }    
+
+
+        </script>
+    </body>
+</html>
