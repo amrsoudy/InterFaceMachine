@@ -31,18 +31,18 @@
             var by = 3;//3
             var x;
             var y;
-      
+
 
             var tabFinal = [
-                "http://localhost:8383/game1/images/Image1.gif",
-                "http://localhost:8383/game1/images/Image2.gif",
-                "http://localhost:8383/game1/images/Image3.gif",
-                "http://localhost:8383/game1/images/Image4.gif",
-                "http://localhost:8383/game1/images/Image5.gif",
-                "http://localhost:8383/game1/images/Image6.gif",
-                "http://localhost:8383/game1/images/Image7.gif",
-                "http://localhost:8383/game1/images/Image8.gif",
-                "http://localhost:8383/game1/images/Blanc.gif"
+                "Image1.gif",
+                "Image2.gif",
+                "Image3.gif", 
+                "Image4.gif",
+                "Image5.gif",
+                "Image6.gif",
+                "Image7.gif",
+                "Image8.gif",
+                "Blanc.gif"
             ];
 
 
@@ -65,27 +65,24 @@
 
                     for (i = 0; i < 9; i++) {
                         var tab = document.images[i].src;
+                        var TempTab = tab.split("/");
+                        tabcourent.push(TempTab[TempTab.length - 1]);
 
-
-                        //alert(tab);
-
-                        tabcourent.push(tab);
-                 
                     }
-					alert(tabcourent);
-                     var bool = tabcourent.every(function (element, index) {
-                    return element === tabFinal[index];
-                });
+                    
+                    var bool = tabcourent.every(function (element, index) {
+                        return element === tabFinal[index];
+                    });
 
-                if (bool == true) {
+                    if (bool == true) {
 
-                    alert("Congratulation");
+                        alert("Congratulation");
+
+                    }
+
 
                 }
 
-
-                }
-               
 
 
 
