@@ -29,46 +29,11 @@
             Et cela ne constitue pas un réel problème. La biométrie a peut-être de beaux jours, bien que lointains, devant elle mais, pour l'instant, il reste beaucoup à faire pour renforcer la sécurité offerte par les mots de passe.
             Les mots de passe, comme la biométrie, ne sont qu'une mesure de sécurité parmi d'autres et aucune d'entre elles n'assure la sécurité à 100 %. La bonne approche dans ce domaine consiste toujours à prendre l'ensemble des mesures appropriées pour atténuer tous les risques possibles. Cela peut signifier une approche au cas par cas, de la même manière qu'un niveau de sécurité différent s'applique à votre porte d'entrée et à la salle des coffres de votre banque.
         </p>
-        <script>
-             var  count =0 ;
-            
-            function ActiveDesActive() {
-
-              count++;
-                if (count === 1) {
-                    alert("all links DisActivated");
-                      
-                    var all = document.getElementsByTagName("a");
-                    for (var i = 0; i < all.length; i++) {
-
-                        all[i].onclick =  function fun() {
-                            return (false);
-
-                        };
-                       
-                }
-                  
-
-                    }else if (count === 2) {
-                    alert("All Links  Activated ");
-                    count = 0;
-                       var all = document.getElementsByTagName("a");
-                    for (var i = 0; i < all.length; i++) {
-
-                        all[i].onclick =  function fun() {
-                            return (true);
-
-                        };
 
 
-                }
-
-                }
-
-                  
-    }    
 
 
+        <script src="exo3.js">
         </script>
     </body>
 </html>
