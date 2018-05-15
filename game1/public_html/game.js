@@ -4,14 +4,102 @@
  * and open the template in the editor.
  */
 //Amr seoudy Comment JavaScript Tutorial - Timers - Making a Stopwatch  vidion dans youtube
- 
+
+document.getElementsByTagName("button")[0].addEventListener('click', mix);
 var bx = 3;
 var by = 3;
+var i = 0;
+
+
+function mix() {
+
+
+    for (var h = 0; h < 9; h++) {
+        var randx = Math.floor(Math.random() * 3 + 1);
+        var randy = Math.floor(Math.random() * 3 + 1);
+        var rand1 = Math.floor(Math.random() * 3 + 1);
+        var rand2 = Math.floor(Math.random() * 3 + 1);
+
+
+        var TemElement = document.getElementsByName("im" + rand1 + rand2)[0].src;
+
+        document.getElementsByName("im" + rand1 + rand2)[0].src = document.getElementsByName("im" + randx + randy)[0].src;
+
+
+        document.getElementsByName("im" + randx + randy)[0].src = TemElement;
+
+
+    }
+    var tableImages = [];
+    for (i = 0; i < 9; i++) {
+        var tab = document.images[i].src;
+        var TempTable = tab.split("/");
+        var valuer = TempTable[TempTable.length - 1];
+
+
+        if (valuer === "Blanc.gif") {
+
+            switch (i + 1) {
+
+                case 1 :
+                    bx = 1;
+                    by = 1;
+                    break;
+
+                case 2 :
+                    bx = 1;
+                    by = 2;
+
+                    break;
+                case 3 :
+                    bx = 1;
+                    by = 3;
+                    break;
+                case 4 :
+                    bx = 2;
+                    by = 1;
+                    break;
+                case 5 :
+                    bx = 2;
+                    by = 2;
+
+                    break;
+                case 6 :
+                    bx = 2;
+                    by = 3;
+
+                    break;
+                case 7 :
+                    bx = 3;
+                    by = 1;
+                    break;
+                case 8 :
+                    bx = 3;
+                    by = 2;
+                    break;
+                case 9 :
+                    bx = 3;
+                    by = 3;
+                    break;
+
+
+            }
+
+            //alert(bx + "" + by);
+            
+        }
+
+
+    }
+
+i = 0;
+}
+
+
 var x;
 var y;
 
 var timer, i, divide;
-i = 0;
 divide = 100;
 
 
@@ -30,14 +118,15 @@ var tabFinal = [
 
 
 function f(x, y) {
-   
+    alert(x + "" + y);
+    alert(i);
+
     if (i === 0) {
 
-        //alert("one");
         start();
 
     }
- 
+
 
 
     var TempScr = document.getElementsByName("im" + x + y)[0].src;
@@ -69,7 +158,7 @@ function f(x, y) {
 
         if (bool === true) {
             stop();
-            alert("Congratulation" +"  "+((i/divide)));
+            alert("Congratulation" + "  " + ((i / divide)));
 
         }
 
@@ -78,7 +167,6 @@ function f(x, y) {
 
 
 }
-
 
 function start() {
     timer = this.setInterval("increment()", (1000 / divide));
@@ -90,9 +178,9 @@ function increment() {
     document.getElementById("Temps").innerHTML = (i / divide);
 
 }
-function stop(){
+function stop() {
     clearInterval(timer);
-    timer = null ;
-  
+    timer = null;
+
 }
 
