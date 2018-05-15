@@ -4,10 +4,15 @@
  * and open the template in the editor.
  */
 
-var bx = 3;//2
-var by = 3;//3
+var bx = 3;
+var by = 3;
 var x;
 var y;
+
+var timer, i, divide;
+i = 0;
+divide = 100;
+
 
 
 var tabFinal = [
@@ -24,10 +29,20 @@ var tabFinal = [
 
 
 function f(x, y) {
+   
+    if (i === 0) {
+
+        //alert("one");
+        start();
+
+    }
+ 
+
+
     var TempScr = document.getElementsByName("im" + x + y)[0].src;
     var TempBlancSrc = document.getElementsByName("im" + bx + by)[0].src;
 
-    if (((x == bx) && (y == by - 1 || y == by + 1)) || ((y == by) && (x == bx - 1 || x == bx + 1))) {
+    if (((x === bx) && (y === by - 1 || y === by + 1)) || ((y === by) && (x === bx - 1 || x === bx + 1))) {
         document.getElementsByName("im" + x + y)[0].src = TempBlancSrc;
         document.getElementsByName("im" + bx + by)[0].src = TempScr;
         tempx = x;
@@ -51,9 +66,9 @@ function f(x, y) {
             return element === tabFinal[index];
         });
 
-        if (bool == true) {
-
-            alert("Congratulation");
+        if (bool === true) {
+            stop();
+            alert("Congratulation" +"  "+(i/divide));
 
         }
 
@@ -61,7 +76,22 @@ function f(x, y) {
     }
 
 
+}
 
 
+function start() {
+    timer = this.setInterval("increment()", (1000 / divide));
+
+}
+
+function increment() {
+    i++;
+    document.getElementById("Temps").innerHTML = (i / divide);
+
+}
+function stop(){
+    clearInterval(timer);
+    timer = null ;
+  
 }
 
