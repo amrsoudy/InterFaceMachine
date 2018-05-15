@@ -8,7 +8,7 @@
 document.getElementsByTagName("button")[0].addEventListener('click', mix);
 var bx = 3;
 var by = 3;
-var i = 0;
+var t = 0;
 
 
 function mix() {
@@ -92,10 +92,10 @@ function mix() {
 
     }
 
-i = 0;
+
 }
 
-
+t =0 ;
 var x;
 var y;
 
@@ -118,10 +118,10 @@ var tabFinal = [
 
 
 function f(x, y) {
-    alert(x + "" + y);
-    alert(i);
+   // alert(x + "" + y);
+  //  alert(t);
 
-    if (i === 0) {
+    if (t === 0) {
 
         start();
 
