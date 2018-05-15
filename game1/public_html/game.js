@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//Amr seoudy Comment JavaScript Tutorial - Timers - Making a Stopwatch  vidion dans youtube
+ 
 var bx = 3;
 var by = 3;
 var x;
@@ -68,7 +69,7 @@ function f(x, y) {
 
         if (bool === true) {
             stop();
-            alert("Congratulation" +"  "+(i/divide));
+            alert("Congratulation" +"  "+((i/divide)));
 
         }
 
