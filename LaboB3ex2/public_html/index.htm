@@ -50,8 +50,17 @@
 
                     document.getElementsByName("im" + 1)[0].src = temp; //1 = //7 
 
+                    for (var h = 7; h > 1; h--) {
+                        if (h == 2) {
+                            document.getElementsByName("im" + h)[0].src = temp1;
 
-                    document.getElementsByName("im" + i)[0].src = document.getElementsByName("im" + (i - 1))[0].src;//7 ==6  // 2 = 1
+                        } else {
+
+                            document.getElementsByName("im" + h)[0].src = document.getElementsByName("im" + (h - 1))[0].src;//7 ==6  // 2 = 1
+                        }
+
+
+                    }
 
                     i--;
 
