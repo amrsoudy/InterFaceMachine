@@ -86,7 +86,7 @@ function mix() {
             }
 
             //alert(bx + "" + by);
-            
+
         }
 
 
@@ -95,14 +95,12 @@ function mix() {
 
 }
 
-t =0 ;
+t = 0;
 var x;
 var y;
 
 var timer, i, divide;
 divide = 100;
-
-
 
 var tabFinal = [
     "Image1.gif",
@@ -118,8 +116,8 @@ var tabFinal = [
 
 
 function f(x, y) {
-   // alert(x + "" + y);
-  //  alert(t);
+    // alert(x + "" + y);
+    //  alert(t);
 
     if (t === 0) {
 
