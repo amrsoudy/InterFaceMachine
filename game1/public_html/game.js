@@ -28,7 +28,6 @@ function mix() {
 
         document.getElementsByName("im" + randx + randy)[0].src = TemElement;
 
-
     }
     var tableImages = [];
     for (i = 0; i < 9; i++) {
@@ -99,7 +98,7 @@ t = 0;
 var x;
 var y;
 
-var timer, i, divide;
+var timer, i=0, divide;
 divide = 100;
 
 var tabFinal = [
@@ -143,8 +142,8 @@ function f(x, y) {
         var tabcourent = [];
 
 
-        for (i = 0; i < 9; i++) {
-            var tab = document.images[i].src;
+        for (j = 0; j < 9; j++) {
+            var tab = document.images[j].src;
             var TempTab = tab.split("/");
             tabcourent.push(TempTab[TempTab.length - 1]);
 
@@ -173,7 +172,7 @@ function start() {
 
 function increment() {
     i++;
-    document.getElementById("Temps").innerHTML = (i / divide);
+    document.getElementById("Temps").innerHTML = "i="+i+";"+(i / divide);
 
 }
 function stop() {

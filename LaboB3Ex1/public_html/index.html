@@ -1,0 +1,80 @@
+<HTML>
+    <HEAD>
+        <TITLE>Les images: animation avec un tableau</TITLE>
+        <SCRIPT LANGUAGE="javascript">
+            var myval;
+            TabImg = new Array();
+            var NbImages = 10;
+            //On range NbImages images gif dans le tableau TabImg :
+            for (i = 0; i < NbImages; i++)
+            {
+                TabImg[i] = new Image();
+                TabImg[i].src = "./images/image" + i + ".GIF";
+            }
+
+            var imageActuelle = 0;
+            function setImage(i)
+            {
+                document.images["MonImage"].src = TabImg[i].src;
+            }
+            var count = 0;
+            function f() {
+                imageActuelle = 0;
+                count++;
+                if (count == 1) {
+                    setImage(imageActuelle);
+                    clearTimeout(myval);
+                    anime();
+                } else if (count == 2) {
+                    clearTimeout(myval);
+
+                    imageActuelle = 0;
+                    setImage(imageActuelle);
+                    count = 0;
+                    anime();
+
+
+                }
+
+
+            }
+
+
+
+            function anime()
+            {
+                setImage(imageActuelle);
+                imageActuelle++;
+
+
+                if (imageActuelle == NbImages)
+                    imageActuelle = 0;
+                myval = setTimeout("anime()", 1000);
+
+
+            }
+
+            function stop() {
+                // setImage(imageActuelle);
+
+
+                clearTimeout(myval);
+            }
+
+
+
+
+
+            //-->
+        </SCRIPT>
+    </HEAD>
+    <BODY>
+        <P ALIGN="Center">
+            Cliquez sur le bouton pour executer la fonction javascript:<BR>
+
+            <input TYPE="button" VALUE="Executer" onclick="f()" />
+            <button name="stop" onclick="stop()">  Stop </button>
+
+            <img name="MonImage" src="images/Image0.gif" height="100" width="100" />
+    </BODY>
+</HTML>
