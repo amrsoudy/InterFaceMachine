@@ -18,20 +18,23 @@
                 document.images["MonImage"].src = TabImg[i].src;
             }
             var count = 0;
+            imageActuelle = 0;
             function f() {
-                imageActuelle = 0;
+
                 count++;
                 if (count == 1) {
+                    if (imageActuelle != 0) {
+                        setImage(imageActuelle);
+                        anime();
+
+                    }
                     setImage(imageActuelle);
                     clearTimeout(myval);
                     anime();
                 } else if (count == 2) {
-                    clearTimeout(myval);
+                    myval = setTimeout("anime()", 1000);
 
-                    imageActuelle = 0;
-                    setImage(imageActuelle);
                     count = 0;
-                    anime();
 
 
                 }
@@ -44,12 +47,13 @@
             function anime()
             {
                 setImage(imageActuelle);
+
+
                 imageActuelle++;
-
-
                 if (imageActuelle == NbImages)
                     imageActuelle = 0;
                 myval = setTimeout("anime()", 1000);
+
 
 
             }

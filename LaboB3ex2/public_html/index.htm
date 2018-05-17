@@ -1,34 +1,73 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
-<head>
-<title>Untitled Document</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-</head>
+    <head>
+        <title>Untitled Document</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    </head>
 
-<body>
-<table width="240" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#0000CC">
-  <tr> 
-    <td align="center"><img name="im1" src="./images/image1.gif" width="120" height="60"></td>
-    <td align="center"><img name="im2" src="./images/image2.gif" width="120" height="60"></td>
-    <td align="center"><img name="im3" src="./images/image3.gif" width="120" height="60"></td>
-	<td align="center"><img name="im4" src="./images/image4.gif" width="120" height="60"></td>	
-    <td align="center"><img name="im5" src="./images/image5.gif" width="120" height="60"></td>
-    <td align="center"><img name="im6" src="./images/image6.gif" width="120" height="60"></td>
-	<td align="center"><img name="im7" src="./images/image7.gif" width="120" height="60"></td>	
-  </tr>
-  <tr> 
-    <td colspan="7"><form name="form1" method="post" action="">
-        <div align="center"> 
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>          
-		  <p>&nbsp;</p>
-          <p><img src="./images/boussole.gif" width="50" /></p>
-          <p>&nbsp;</p>
-		  <p>&nbsp;</p>
-          <p>&nbsp;</p>		  
-        </div>
-      </form></td>
-  </tr>
-</table>
-<p>&nbsp;</p></body>
+    <body>
+        <table width="240" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#0000CC">
+            <tr> 
+                <td align="center"><img name="im1" src="./images/image1.gif" width="120" height="60"></td>
+                <td align="center"><img name="im2" src="./images/image2.gif" width="120" height="60"></td>
+                <td align="center"><img name="im3" src="./images/image3.gif" width="120" height="60"></td>
+                <td align="center"><img name="im4" src="./images/image4.gif" width="120" height="60"></td>	
+                <td align="center"><img name="im5" src="./images/image5.gif" width="120" height="60"></td>
+                <td align="center"><img name="im6" src="./images/image6.gif" width="120" height="60"></td>
+                <td align="center"><img name="im7" src="./images/image7.gif" width="120" height="60"></td>	
+            </tr>
+            <tr> 
+                <td colspan="7"><form name="form1" method="post" action="">
+                        <div align="center"> 
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>          
+                            <p>&nbsp;</p>
+                            <p><img src="./images/boussole.gif" width="50" /></p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>		  
+                        </div>
+                    </form></td>
+            </tr>
+        </table>
+        <p>&nbsp;</p>
+
+        <script>
+            window.onload;
+
+            var i = 7;
+            var myval = setInterval("f()", 1000);
+
+            function f() {
+                var temp;
+                var temp1;
+
+                temp = document.getElementsByName("im" + 7)[0].src;//7
+                temp1 = document.getElementsByName("im" + 1)[0].src;
+
+                if (i >= 1) {
+
+
+                    document.getElementsByName("im" + 1)[0].src = temp; //1 = //7 
+
+
+                    document.getElementsByName("im" + i)[0].src = document.getElementsByName("im" + (i - 1))[0].src;//7 ==6  // 2 = 1
+
+                    i--;
+
+                } else {
+
+
+                    i = 7;
+
+                }
+
+
+
+            }
+
+
+
+        </script>
+    </body>
 </html>
