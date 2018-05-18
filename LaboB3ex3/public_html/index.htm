@@ -76,7 +76,7 @@
             //language="JavaScript" type="text/JavaScript"
 
             document.getElementsByTagName("input")[0].onclick = function () {
-                getImages()
+                newImages()
             };
             document.getElementsByTagName("input")[1].onclick = function () {
                 cacherImages()
@@ -86,9 +86,11 @@
             };
 
             var myTime;
-            var show = false;
+            var count = 0;
 
-            function getImages() {
+
+            function newImages() {
+
                 var tabImages = document.images;
                 for (var i = 0; i < 36; i++) {
                     tabImages[i].style.visibility = 'visible';
@@ -98,23 +100,26 @@
                         if (i > 19) {
 
                             tabImages[i].src = "./images/im" + (i - 20) + ".jpg"
-                            if (i > 29) {
-                                tabImages[i].src = "./images/im" + (i - 30) + ".jpg"
-                                if (i > 32) {
-
-                                    tabImages[i].src = "./images/im" + (i - 33) + ".jpg"
-                                }
+                            if (i > 27) {
+                                tabImages[i].src = "./images/im" + (i - 28) + ".jpg"
+                               
                             }
                         }
                     }
                 }
-               
+                count++;
+                clearTimeout(myTime);
+                myTime = setTimeout("cacherImages()", 5000);
+                if (count > 1) {
+
+                    clearTimeout(myTime);
+                    shuffel(tabImages);
                     myTime = setTimeout("cacherImages()", 5000);
-               
 
-                   
+                }
 
-                       }
+
+            }
 
             function cacherImages() {
                 var tabImages = document.images;
@@ -126,13 +131,35 @@
 
             function showImages() {
 
-                show = true;
-                 clearTimeout(myTime);
+
+                clearTimeout(myTime);
                 var tabImages = document.images;
                 for (var i = 0; i < 36; i++) {
                     tabImages[i].style.visibility = 'visible';
 
                 }
+
+
+            }
+
+            function  shuffel(tabImages) {
+
+                var currentIndex = tabImages.length, tempval, randIndex;
+
+                while (currentIndex != 0) {
+
+                    randIndex = Math.floor(Math.random() * currentIndex);
+                    // alert(randIndex);
+                    currentIndex -= 1;
+
+                    tempval = tabImages[currentIndex].src;
+                    tabImages[currentIndex].src = tabImages[randIndex].src;
+                    tabImages[randIndex].src = tempval;
+
+                }
+
+            
+
 
 
             }
