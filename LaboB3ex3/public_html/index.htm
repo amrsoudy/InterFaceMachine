@@ -60,7 +60,7 @@
                     <td align="center"><img name="im45" src="./images/blanc.jpg" width="80" height="80"></td>
                 </tr>
                 <tr> 
-                    <td align="center"><img name="im50" src="./images/blanc.jpg" width="80" height="80"></td>
+                    <td align="center"><img name="im50"  src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im51" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im52" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im53" src="./images/blanc.jpg" width="80" height="80"></td>
@@ -74,35 +74,36 @@
 
         <script >
             //language="JavaScript" type="text/JavaScript"
-
-            document.getElementsByTagName("input")[0].onclick = function () {
-                newImages()
-            };
-            document.getElementsByTagName("input")[1].onclick = function () {
-                cacherImages()
-            };
-            document.getElementsByTagName("input")[2].onclick = function () {
-                showImages()
-            };
-
             var myTime;
             var count = 0;
-
+            var tabImages;
+            var state = false;
+            document.getElementsByTagName("input")[0].onclick = function () {
+                newImages();
+            };
+            document.getElementsByTagName("input")[1].onclick = function () {
+                cacherImages();
+            };
+            document.getElementsByTagName("input")[2].onclick = function () {
+                showImages();
+            };
 
             function newImages() {
+                state = true;
 
-                var tabImages = document.images;
+                tabImages = document.images;
                 for (var i = 0; i < 36; i++) {
+
                     tabImages[i].style.visibility = 'visible';
-                    tabImages[i].src = "./images/im" + i + ".jpg"
+                    tabImages[i].src = "./images/im" + i + ".jpg";
                     if (i > 9) {
-                        tabImages[i].src = "./images/im" + (i - 10) + ".jpg"
+                        tabImages[i].src = "./images/im" + (i - 10) + ".jpg";
                         if (i > 19) {
 
-                            tabImages[i].src = "./images/im" + (i - 20) + ".jpg"
+                            tabImages[i].src = "./images/im" + (i - 20) + ".jpg";
                             if (i > 27) {
-                                tabImages[i].src = "./images/im" + (i - 28) + ".jpg"
-                               
+                                tabImages[i].src = "./images/im" + (i - 28) + ".jpg";
+
                             }
                         }
                     }
@@ -122,18 +123,21 @@
             }
 
             function cacherImages() {
-                var tabImages = document.images;
-                for (var i = 0; i < 36; i++) {
-                    tabImages[i].style.visibility = 'hidden';
+                for (var d = 0; d < 36; d++) {
+                    tabImages[d].style.visibility = 'hidden';
+                    tabImages[d].addEventListener("click", match);
 
                 }
+
+
+
             }
 
             function showImages() {
 
-
                 clearTimeout(myTime);
-                var tabImages = document.images;
+                myTime = setTimeout("cacherImages()", 5000);
+
                 for (var i = 0; i < 36; i++) {
                     tabImages[i].style.visibility = 'visible';
 
@@ -156,15 +160,26 @@
                     tabImages[currentIndex].src = tabImages[randIndex].src;
                     tabImages[randIndex].src = tempval;
 
+
                 }
-
-            
-
-
+                alert("Melangé");
 
             }
 
+            function match() {
 
+
+                if (this.style.visibility == "hidden") {
+                  //  this.style.visibility = "visible";
+                    alert(this.style.visibility.toString());
+
+
+                } else if (this.style.visibility == "visible") {
+                    alert(this.style.visibility.toString());
+
+
+                }
+            }
 
         </script>
     </body>
