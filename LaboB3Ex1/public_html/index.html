@@ -32,6 +32,7 @@
                     clearTimeout(myval);
                     anime();
                 } else if (count == 2) {
+                    clearTimeout(myval);
                     myval = setTimeout("anime()", 1000);
 
                     count = 0;
@@ -47,11 +48,12 @@
             function anime()
             {
                 setImage(imageActuelle);
-
+    clearTimeout(myval);
 
                 imageActuelle++;
                 if (imageActuelle == NbImages)
                     imageActuelle = 0;
+            
                 myval = setTimeout("anime()", 1000);
 
 
