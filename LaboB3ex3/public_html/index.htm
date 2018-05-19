@@ -145,7 +145,7 @@
                     tabImages[i].style.visibility = 'visible';
 
                 }
-                 for (var e = 1; e < 37; e++) {
+                for (var e = 1; e < 37; e++) {
                     document.getElementsByTagName("td")[e].removeEventListener("click", match);
 
 
@@ -180,8 +180,32 @@
             }
 
             function match() {
+                var num;
                 alert(this.cellIndex);
-                alert(this.parentNode.rowIndex-1);
+                alert(this.parentNode.rowIndex - 1);
+                switch (this.parentNode.rowIndex - 1) {
+                    case 0:
+                        num = this.cellIndex;
+                        break;
+                    case 1:
+                        num = (6 + this.cellIndex);
+                        break;
+                    case 2 :
+                        num = (12 + this.cellIndex);
+                        break;
+                    case 3 :
+                        num = (18 + this.cellIndex);
+                        break;
+                    case 4 :
+                        num = (24+ this.cellIndex);
+                        break;
+                        case 5 : 
+                            num =(30+this.cellIndex);
+                            break;
+
+                }
+                alert(num);
+                tabImages[num].style.visibility = "visible";
 
                 /*       if (this.style.visibility == "hidden") {
                  //  this.style.visibility = "visible";
