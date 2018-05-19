@@ -1,0 +1,8 @@
+{
+    "name": "HideAppearCssJs",
+    "version": "1.0.0",
+    "keywords": ["util", "functional", "server", "client", "browser"],
+    "author": "AMR",
+    "contributors": [],
+    "dependencies": {}
+}
