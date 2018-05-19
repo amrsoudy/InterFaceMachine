@@ -10,16 +10,16 @@
         </style>
     </head>
     <body>
-        <div style="margin-left:200px;width:200px">	
+        <div style="margin-left:200px;width:200px">
             <table>
-                <tr> 
+                <tr>
                     <td colspan="6" align="center">
                         <input type="button" value="nouvelle partie"  />
                         <input type="button" value="cacher grille" />
                         <input type="button" value="decouvrir grille" />
                     </td>
                 </tr>
-                <tr> 
+                <tr>
                     <td align="center"><img name="im00" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im01" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im02" src="./images/blanc.jpg" width="80" height="80"></td>
@@ -27,7 +27,7 @@
                     <td align="center"><img name="im04" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im05" src="./images/blanc.jpg" width="80" height="80"></td>
                 </tr>
-                <tr> 
+                <tr>
                     <td align="center"><img name="im10" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im11" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im12" src="./images/blanc.jpg" width="80" height="80"></td>
@@ -35,7 +35,7 @@
                     <td align="center"><img name="im14" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im15" src="./images/blanc.jpg" width="80" height="80"></td>
                 </tr>
-                <tr> 
+                <tr>
                     <td align="center"><img name="im20" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im21" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im22" src="./images/blanc.jpg" width="80" height="80"></td>
@@ -43,7 +43,7 @@
                     <td align="center"><img name="im24" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im25" src="./images/blanc.jpg" width="80" height="80"></td>
                 </tr>
-                <tr> 
+                <tr>
                     <td align="center"><img name="im30" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im31" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im32" src="./images/blanc.jpg" width="80" height="80"></td>
@@ -51,7 +51,7 @@
                     <td align="center"><img name="im34" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im35" src="./images/blanc.jpg" width="80" height="80"></td>
                 </tr>
-                <tr> 
+                <tr>
                     <td align="center"><img name="im40" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im41" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im42" src="./images/blanc.jpg" width="80" height="80"></td>
@@ -59,7 +59,7 @@
                     <td align="center"><img name="im44" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im45" src="./images/blanc.jpg" width="80" height="80"></td>
                 </tr>
-                <tr> 
+                <tr>
                     <td align="center"><img name="im50"  src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im51" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im52" src="./images/blanc.jpg" width="80" height="80"></td>
@@ -67,7 +67,7 @@
                     <td align="center"><img name="im54" src="./images/blanc.jpg" width="80" height="80"></td>
                     <td align="center"><img name="im55" src="./images/blanc.jpg" width="80" height="80"></td>
                 </tr>
-            </table>	
+            </table>
             <span id="message" ></span>
         </div>
 
@@ -78,6 +78,8 @@
             var count = 0;
             var tabImages;
             var state = false;
+            var visibleImagesNo = [];
+            var tabd = [];
             document.getElementsByTagName("input")[0].onclick = function () {
                 newImages();
             };
@@ -90,6 +92,8 @@
 
             function newImages() {
                 state = true;
+                visibleImagesNo = [];
+                no = 0 ;
 
                 tabImages = document.images;
                 for (var i = 0; i < 36; i++) {
@@ -123,11 +127,38 @@
             }
 
             function cacherImages() {
-                for (var d = 0; d < 36; d++) {
-                    tabImages[d].style.visibility = 'hidden';
 
 
+                if (visibleImagesNo.length == 0) {
+                    for (var d = 0; d < 36; d++) {
+
+                        tabImages[d].style.visibility = 'hidden';
+                    }
+
+                } else {
+
+                    // alert(visibleImagesNo);
+                    for (var d = 0; d < 36; d++) {
+                        for (var u = 0; u < visibleImagesNo.length; u++) {
+                            if (d !== visibleImagesNo[u]) {
+                                tabImages[d].style.visibility = 'hidden';
+
+                            } else if (d == visibleImagesNo[u]) {
+                                //  alert(num1+ "   " +num2);
+                                tabd.push(d);
+
+                            }
+
+                            for (var w = 0; w < tabd.length; w++) {
+                                tabImages[tabd[w]].style.visibility = 'visible';
+
+                            }
+                        }
+
+
+                    }
                 }
+
                 for (var e = 1; e < 37; e++) {
                     document.getElementsByTagName("td")[e].addEventListener("click", match);
 
@@ -146,8 +177,9 @@
 
                 }
                 for (var e = 1; e < 37; e++) {
-                    document.getElementsByTagName("td")[e].removeEventListener("click", match);
-
+                    if (tabImages[a].style.visibility == "hidden") {
+                        document.getElementsByTagName("td")[e].removeEventListener("click", match);
+                    }
 
                 }
 
@@ -178,49 +210,160 @@
                 }
 
             }
+            var number = 0;
+            var un;
+            var deux;
+            var num1;
+            var num2;
+            var no = 0;
+
 
             function match() {
-                var num;
-                alert(this.cellIndex);
-                alert(this.parentNode.rowIndex - 1);
-                switch (this.parentNode.rowIndex - 1) {
-                    case 0:
-                        num = this.cellIndex;
-                        break;
-                    case 1:
-                        num = (6 + this.cellIndex);
-                        break;
-                    case 2 :
-                        num = (12 + this.cellIndex);
-                        break;
-                    case 3 :
-                        num = (18 + this.cellIndex);
-                        break;
-                    case 4 :
-                        num = (24+ this.cellIndex);
-                        break;
-                        case 5 : 
-                            num =(30+this.cellIndex);
+                number++;
+                // alert(number);
+                clearTimeout(myTime);
+
+
+                if (number == 1) {
+
+                    switch (this.parentNode.rowIndex - 1) {
+                        case 0:
+                            num1 = this.cellIndex;
+                            break;
+                        case 1:
+                            num1 = (6 + this.cellIndex);
+                            break;
+                        case 2 :
+                            num1 = (12 + this.cellIndex);
+                            break;
+                        case 3 :
+                            num1 = (18 + this.cellIndex);
+                            break;
+                        case 4 :
+                            num1 = (24 + this.cellIndex);
+                            break;
+                        case 5 :
+                            num1 = (30 + this.cellIndex);
                             break;
 
-                }
-                alert(num);
-                tabImages[num].style.visibility = "visible";
+                    }
 
-                /*       if (this.style.visibility == "hidden") {
-                 //  this.style.visibility = "visible";
-                 alert(this.style.visibility.toString());
-                 
-                 
-                 } else if (this.style.visibility == "visible") {
-                 
-                 alert(this.style.visibility.toString());
-                 
-                 
-                 }*/
+                    tabImages[num1].style.visibility = "visible";
+
+                    un = tabImages[num1].src;
+                    //alert("un       " + un);
+
+
+                } else if (number == 2) {
+
+                    switch (this.parentNode.rowIndex - 1) {
+                        case 0:
+                            num2 = this.cellIndex;
+                            break;
+                        case 1:
+                            num2 = (6 + this.cellIndex);
+                            break;
+                        case 2 :
+                            num2 = (12 + this.cellIndex);
+                            break;
+                        case 3 :
+                            num2 = (18 + this.cellIndex);
+                            break;
+                        case 4 :
+                            num2 = (24 + this.cellIndex);
+                            break;
+                        case 5 :
+                            num2 = (30 + this.cellIndex);
+                            break;
+
+                    }
+                    if (num1 !== num2) {
+
+
+                        tabImages[num2].style.visibility = "visible";
+
+                        deux = tabImages[num2].src;
+                        number = 0;
+                        setTimeout("verifi(un,deux)", 1000);
+                    } else if (num1 == num2) {
+
+                        for (var d = 0; d < 36; d++) {
+                            for (var u = 0; u < visibleImagesNo.length; u++) {
+                                if (d !== visibleImagesNo[u]) {
+                                    tabImages[d].style.visibility = 'hidden';
+
+                                } else if (d == visibleImagesNo[u]) {
+                                    //  alert(num1+ "   " +num2);
+                                    tabd.push(d);
+
+                                }
+
+                                for (var w = 0; w < tabd.length; w++) {
+                                    tabImages[tabd[w]].style.visibility = 'visible';
+
+                                }
+                            }
+
+
+                        }
+
+                        //  tabImages[num2].style.visibility = "hidden";
+                        number = 0;
+
+                    }
+                }
 
 
             }
+            function verifi(un, deux) {
+
+                if (un !== deux) {
+                    //
+                    tabImages[num1].style.visibility = "hidden";
+
+                    //  alert(un);
+                    tabImages[num2].style.visibility = "hidden";
+                    // alert(deux);
+
+                } else if (un === deux) {
+
+                    visibleImagesNo.push(num1);
+                    visibleImagesNo.push(num2);
+                    no++;
+                    if (no > 18){
+                        alert("you already Finished and you did win make new game ");
+                        
+                        
+                    }
+                }
+               // alert(no);
+
+             //   for (var a = 0; a < 36; a++) {
+
+
+                   if (no == 18) {
+
+                        alert("you Win Congratulation");
+                   }
+//
+
+              //  }
+
+            }
+
+            function wait(ms) {
+
+
+                var start = new Date().getTime();
+                var end = start;
+                while (end < start + ms) {
+                    end = new Date().getTime();
+
+
+                }
+
+            }
+
 
         </script>
     </body>
