@@ -125,11 +125,14 @@
             function cacherImages() {
                 for (var d = 0; d < 36; d++) {
                     tabImages[d].style.visibility = 'hidden';
-                    tabImages[d].addEventListener("click", match);
+
 
                 }
+                for (var e = 1; e < 37; e++) {
+                    document.getElementsByTagName("td")[e].addEventListener("click", match);
 
 
+                }
 
             }
 
@@ -140,6 +143,11 @@
 
                 for (var i = 0; i < 36; i++) {
                     tabImages[i].style.visibility = 'visible';
+
+                }
+                 for (var e = 1; e < 37; e++) {
+                    document.getElementsByTagName("td")[e].removeEventListener("click", match);
+
 
                 }
 
@@ -163,22 +171,31 @@
 
                 }
                 alert("Melangé");
+                for (var e = 1; e < 37; e++) {
+                    document.getElementsByTagName("td")[e].removeEventListener("click", match);
+
+
+                }
 
             }
 
             function match() {
+                alert(this.cellIndex);
+                alert(this.parentNode.rowIndex-1);
+
+                /*       if (this.style.visibility == "hidden") {
+                 //  this.style.visibility = "visible";
+                 alert(this.style.visibility.toString());
+                 
+                 
+                 } else if (this.style.visibility == "visible") {
+                 
+                 alert(this.style.visibility.toString());
+                 
+                 
+                 }*/
 
 
-                if (this.style.visibility == "hidden") {
-                  //  this.style.visibility = "visible";
-                    alert(this.style.visibility.toString());
-
-
-                } else if (this.style.visibility == "visible") {
-                    alert(this.style.visibility.toString());
-
-
-                }
             }
 
         </script>
