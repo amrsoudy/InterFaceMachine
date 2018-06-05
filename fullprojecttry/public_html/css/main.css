@@ -1,0 +1,25 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2018-06-04, 11:34:53
+    Author     : AMR
+*/
+
+.bg-cover{
+
+    background: url(../images/photo1.jpg);
+    height: 500px;
+    background-size:cover;
+
+};
+.bg-cover2{
+     background: url(../images/photo2.jpg);
+    height: 200px;
+    background-size:cover;
+    
+    
+    
+};

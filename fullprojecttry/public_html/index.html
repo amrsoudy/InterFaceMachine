@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/main.css">
+                <link rel="stylesheet" href="css/mainpage.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+
+
+    </head>
+    <body>
+
+        <div class="container" >
+            <div class="row">
+                <div class="col-lg-12 col-xs-4 col-sm-8 col-md-10 bg-primary well-lg" >
+                    <p>Taskes Project Amr Seoudy</p>
+                    <div class="col-lg-3 bg-success">
+                        <p id="p1" align="center" style="color: black" > About</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row" >
+                <div class="col-lg-12 col-xs-4 col-sm-8 col-md-10 bg-warning well-lg " >
+
+                </div>
+                <div class="col-lg-12 col-xs-4 col-sm-8 col-md-10 bg-info well-lg" >
+
+                </div>
+                <div class="col-lg-12 col-xs-4 col-sm-8 col-md-10 bg-cover well-lg" >
+
+
+                    <input id="username" type="text" name="User Name"  placeholder="user name"><br><br>
+                    <input id="pass" type="text" name="Password" placeholder="Pass" ><br><br>
+                    <input type="button" onclick="login()" name="Login" value="Login">
+
+                </div>
+            </div>
+        </div>
+        <script>
+		 //WHERE USERNAME = '.$_GET['username'].' AND PASSWORD = '.$_GET['pass']
+		 //username="+u+"&pass="+p
+			var xhr;
+			function login(){
+				var u = document.getElementById("username").value;
+				var p = document.getElementById("pass").value;
+				
+				var url = "users.php?username="+u+"&pass="+p;
+				alert(url);
+			
+				xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = traiterReponse;
+				try
+				{
+					xhr.open("GET",url,true);
+				}
+				catch (e)
+				{
+				  alert(e);
+				}
+				xhr.send(null);
+			}
+			function traiterReponse()
+			{
+			  if (xhr.readyState == 4) 
+				if (xhr.status == 200)  
+				{
+				  var reponseJSON = xhr.responseText;
+				  alert(reponseJSON);  
+				  var reponse = JSON.parse(reponseJSON);
+				  alert(reponse);
+
+				  
+				  if (reponse.length == 0) { 
+					alert("verify your username or password please");
+					return;
+				  }
+				  else {
+				  alert("welcome ")
+					
+					document.getElementsByTagName("body")[0].innerHTML = window.open("Main.html", "_self");
+				  }
+				}
+				else
+				{
+				  alert("Problème : "+xhr.statusText);
+				}
+			}
+					
+
+
+        </script>
+
+    </body>
+</html>
