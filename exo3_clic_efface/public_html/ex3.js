@@ -9,6 +9,7 @@
 function f(x) {
 
     x.style.display = 'none';
+    //x.style.visibility  = 'hidden';
 
 }
 
@@ -19,6 +20,7 @@ function returnall() {
     var i;
     for (i = 0; i < x.length; i++) {
         x[i].style.display = 'block';
+       //x[i].style.visibility = 'visible';
     }
 
 }
