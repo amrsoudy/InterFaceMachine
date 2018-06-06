@@ -172,7 +172,7 @@ function start() {
 
 function increment() {
     i++;
-    document.getElementById("Temps").innerHTML = "i="+i+";"+(i / divide);
+    document.getElementById("Temps").innerHTML = (i / divide);
 
 }
 function stop() {
