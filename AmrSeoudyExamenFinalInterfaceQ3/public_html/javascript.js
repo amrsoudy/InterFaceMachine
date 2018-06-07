@@ -4,20 +4,16 @@
  * and open the template in the editor.
  */
 
-var listeMonnaies = [{nom: "Euro", valeur: 10.5}, {nom: "US", valeur: 5}, {nom: "Livre", valeur: 2}];
 window.onload = function () {
-    getNomsMonnaies();
+      charger();
 };
 
+var tab = [];
+var tab2 =[];
 function getNomsMonnaies() {
 
-    var tab = [];
 
-    for (var i = 0; i < listeMonnaies.length; i++) {
-
-        tab.push(listeMonnaies[i].nom);
-
-    }
+  
     var x = document.getElementById("selected");
     for (var i = 0; i < tab.length; i++) {
 
@@ -30,14 +26,14 @@ function getNomsMonnaies() {
 }
 
 
-
+var need2 ;
 function getTaux(value) {
 
-    for (var i = 0; i < listeMonnaies.length; i++) {
-
-        if (listeMonnaies[i].nom == value) {
-
-            need2 = listeMonnaies[i].valeur;
+    for (var i = 0; i < tab2.length; i++) {
+		
+        if (tab[i] == value) {
+			
+            need2 = tab2[i].VALEUR;
         }
 
 
@@ -54,19 +50,22 @@ document.getElementById("conv").onclick = function () {
 };
 
 function calcul() {
+	
+	
     var mountant = document.getElementById("nb1").value;
     var x = document.getElementById("selected");
-    var value = x.options[x.selectedIndex].value;
+	var value = x.options[x.selectedIndex].value;
+	
     var need;
-    // alert(value);
 
     need = getTaux(value);
 
 
 
+
     document.getElementById("res").value = (mountant * need);
 
-    charger();
+  
 
 
 }
@@ -92,19 +91,19 @@ function traiterReponse6()
         if (xhr.status == 200)
         {
             var reponseJSON = xhr.responseText;
-            alert(reponseJSON);
+            //alert(reponseJSON);
             var reponse = JSON.parse(reponseJSON);
-            alret(reponse);
             if (reponse.length == 0) {
-                document.getElementById("mainmain").innerHTML = "Aucun Tasks";
-                return;
+               alert("il ya pas chois ");
             } else {
-                var i, s = "<li class='list-group-item list-group-item-warning'> TASK ID" + "  -    " + "TASK DESCRIPTION   " + "     -      " + "       PROJECT ID " + "     -      " + "  EMPLOYEE ID</li>";
-                ;
-                for (i = 0; prod = reponse[i]; i++) {
-                    s += "<li class='list-group-item list-group-item-warning'>" + prod.TASKID + " - " + prod.TASKDESC + " - " + prod.PROJECTID + " - " + prod.EMPLOYEEID + "</li>";
+				
+                
+                for (var i = 0; prod = reponse[i]; i++) {
+					tab.push(prod.NOM);
+					tab2.push(prod);
+					
                 }
-                document.getElementById("mainmain").innerHTML = s;
+                getNomsMonnaies();
             }
         } else
         {
