@@ -16,7 +16,132 @@ and open the template in the editor.
         <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="css/mainpage.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
 
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+
+            /* Full-width input fields */
+            input[type=text], input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+
+            /* Set a style for all buttons */
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+            /* Extra styles for the cancel button */
+            .cancelbtn {
+                width: auto;
+                padding: 10px 18px;
+                background-color: #f44336;
+            }
+
+            /* Center the image and position the close button */
+            .imgcontainer {
+                text-align: center;
+                margin: 24px 0 12px 0;
+                position: relative;
+            }
+
+            img.avatar {
+                width: 40%;
+                border-radius: 50%;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            span.psw {
+                float: right;
+                padding-top: 16px;
+            }
+
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                padding-top: 60px;
+            }
+
+            /* Modal Content/Box */
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+                border: 1px solid #888;
+                width: 80%; /* Could be more or less, depending on screen size */
+            }
+
+            /* The Close Button (x) */
+            .close {
+                position: absolute;
+                right: 25px;
+                top: 0;
+                color: #000;
+                font-size: 35px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: red;
+                cursor: pointer;
+            }
+
+            /* Add Zoom Animation */
+            .animate {
+                -webkit-animation: animatezoom 0.6s;
+                animation: animatezoom 0.6s
+            }
+
+            @-webkit-keyframes animatezoom {
+                from {-webkit-transform: scale(0)} 
+                to {-webkit-transform: scale(1)}
+            }
+
+            @keyframes animatezoom {
+                from {transform: scale(0)} 
+                to {transform: scale(1)}
+            }
+
+            /* Change styles for span and cancel button on extra small screens */
+            @media screen and (max-width: 300px) {
+                span.psw {
+                    display: block;
+                    float: none;
+                }
+                .cancelbtn {
+                    width: 100%;
+                }
+            }
+        </style>
 
 
     </head>
@@ -35,8 +160,16 @@ and open the template in the editor.
                         <div class="col-lg-3  ">
                             <p class="normal" onclick="openTasks()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"><b> Add Tasks</b> </p>
                         </div>
-                        <div class="col-lg-3  ">
-                            <p class="normal" onclick="charger()" onmouseover="mouseover(this)" onmouseout="mouseout(this)"><b> show All Tasks</b> </p>
+
+
+                        <div class=" col-lg-3 dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Gestion De Tasks
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a onclick="charger()">Show All Tasks </a></li>
+                                <li><a onclick="openPar()" style="width:auto;">tasks of Project or Par Employee</a></li>
+                                <li><a onclick="openStatistics()">show the status of all tasks </a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -54,491 +187,46 @@ and open the template in the editor.
             </div>
 
         </div>
-
-        <script>
-            //for the last tab lis all tasks connection
-
-            var xhr;
-            function charger() {
-                var url = "tasks.php?";
-                xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = traiterReponse6;
-                try
-                {
-                    xhr.open("GET", url, true);
-                } catch (e)
-                {
-                    alert(e);
-                }
-                xhr.send(null);
-            }
-            function traiterReponse6()
-            {
-                if (xhr.readyState == 4) 
-                    if (xhr.status == 200) 
-                    {
-                        var reponseJSON = xhr.responseText;
-                       
-                        var reponse = JSON.parse(reponseJSON);	
-                        if (reponse.length == 0) { 
-                            document.getElementById("mainmain").innerHTML = "Aucun Tasks";
-                            return;
-                        } else {
-                            var i, s ="<li class='list-group-item list-group-item-warning'> TASK ID"+"  -    "+"TASK DESCRIPTION   "+"     -      "+"       PROJECT ID "+"     -      "+"  EMPLOYEE ID</li>";;
-                            for (i = 0; prod = reponse[i]; i++) {
-                                s += "<li class='list-group-item list-group-item-warning'>" + prod.TASKID + " - " + prod.TASKDESC + " - " + prod.PROJECTID + " - " + prod.EMPLOYEEID + "</li>";
-                            }
-                            document.getElementById("mainmain").innerHTML = s;
-                        }
-                    } else
-                    {
-                        alert("Problème : " + xhr.statusText);
-                    }
-            }
-            //from here i created the dynamic  divs 
-
-            count = 0;
-            count2 = 0;
-            function mouseover(x) {
-                x.style.color = 'red';
-
-            }
-            ;
-
-            function mouseout(x) {
-                x.style.color = 'white';
-
-            }
-            ;
-            function mouseoverfont(x) {
-                x.style.fontSize = "30px";
-
-            }
-            ;
-
-            function mouseoutfont(x) {
-                x.style.fontSize = "16px";
-                x.style.textAlign = "left";
-
-            }
-            ;
-            function openproject() {
-                document.getElementById("mainmain").innerHTML = "";
-
-                var div_main = document.createElement('div');
-                div_main.className = 'container';
-                div_main.id = "div1";
-                document.getElementById("mainmain").appendChild(div_main);
-
-
-
-                var div_a1 = document.createElement('div');
-                div_a1.className = 'row';
-                div_main.appendChild(div_a1);
-
-
-                var div_a2 = document.createElement('div');
-                div_a2.className = 'col-lg-12 bg-warning text-center well-lg';
-                div_a1.appendChild(div_a2);
-
-                var p1 = document.createElement('p');
-                p1.innerHTML = "Add Project";
-
-
-
-                p1.style.color = "red";
-                p1.style.fontSize = "25px";
-                div_a2.appendChild(p1);
-
-
-                var text1 = document.createElement('input');
-                text1.type = "text";
-                text1.name = "Projectid";
-                text1.id = "projectid";
-                text1.placeholder = "Project ID";
-                text1.style.width = "300px";
-                div_a2.appendChild(text1);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-
-                var text2 = document.createElement('input');
-                text2.type = "text";
-                text2.name = "ProjectName";
-                text2.id = "projectname";
-                text2.placeholder = "Name of the Project";
-                text2.style.width = "300px";
-                div_a2.appendChild(text2);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-
-                var text3 = document.createElement('input');
-                text3.type = "text";
-                text3.id = "startingdate";
-                text3.name = "startDate";
-                text3.placeholder = "Starting Date  yyyy-MM-dd";
-                text3.style.width = "300px";
-                div_a2.appendChild(text3);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-
-                var btu1 = document.createElement('input');
-                btu1.type = "button";
-                btu1.id = "btu1";
-                btu1.name = "submit";
-                btu1.value = "submit";
-                btu1.style.width = "100px";
-                btu1.onclick = function () {
-                    insertproject();
-                    return false;
-                };
-                div_a2.appendChild(btu1);
-
-            }
-            ;
-
-            document.getElementById("btu1").onclick = function () {
-                alert("Data Saved");
-            };
-
-
-
-            function openEmployee() {
-
-                document.getElementById("mainmain").innerHTML = "";
-
-
-
-                var div_main = document.createElement('div');
-                div_main.className = 'container';
-                div_main.id = "div2";
-
-                document.getElementById("mainmain").appendChild(div_main);
-
-
-
-                var div_a1 = document.createElement('div');
-                div_a1.className = 'row';
-                div_main.appendChild(div_a1);
-
-
-                var div_a2 = document.createElement('div');
-                div_a2.className = 'col-lg-12 bg-warning  text-center well-lg';
-                div_a1.appendChild(div_a2);
-
-                var p1 = document.createElement('p');
-                p1.innerHTML = "Add Employee";
-                p1.style.color = "red";
-                p1.style.fontSize = "25px";
-                div_a2.appendChild(p1);
-
-
-                var text1 = document.createElement('input');
-                text1.type = "text";
-                text1.id = "employeeid";
-                text1.name = "EmployyId";
-                text1.placeholder = "Employee ID";
-                text1.style.width = "300px";
-                div_a2.appendChild(text1);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-
-                var text2 = document.createElement('input');
-                text2.type = "text";
-                text2.id = "employeename";
-                text2.name = "EmployeeName";
-                text2.placeholder = "Name of the Employee";
-                text2.style.width = "300px";
-                div_a2.appendChild(text2);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-
-                var text3 = document.createElement('input');
-                text3.type = "text";
-                text3.id = "startingdate";
-                text3.name = "startDate";
-                text3.placeholder = "Starting Date  yyyy-MM-dd";
-                text3.style.width = "300px";
-                div_a2.appendChild(text3);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-
-                var text4 = document.createElement('input');
-                text4.type = "text";
-                text4.id = "position";
-                text4.name = "position";
-                text4.placeholder = "position:Like  Mgr - Emp";
-                text4.style.width = "300px";
-                div_a2.appendChild(text4);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-                var btu1 = document.createElement('input');
-                btu1.type = "button";
-                btu1.name = "submit";
-                btu1.value = "submit";
-                btu1.style.width = "100px";
-                btu1.onclick = function () {
-                    insertemployee();
-
-                    return false;
-                };
-                div_a2.appendChild(btu1);
-
-
-
-            }
-            ;
-
-            function openTasks() {
-
-                document.getElementById("mainmain").innerHTML = "";
-
-
-
-                var div_main = document.createElement('div');
-                div_main.className = 'container';
-                div_main.id = "div2";
-
-                document.getElementById("mainmain").appendChild(div_main);
-
-
-
-                var div_a1 = document.createElement('div');
-                div_a1.className = 'row';
-                div_main.appendChild(div_a1);
-
-
-                var div_a2 = document.createElement('div');
-                div_a2.className = 'col-lg-12 bg-warning  text-center well-lg';
-                div_a1.appendChild(div_a2);
-
-                var p1 = document.createElement('p');
-                p1.innerHTML = "Add Task";
-                p1.style.color = "red";
-
-
-                p1.style.fontSize = "25px";
-
-                div_a2.appendChild(p1);
-
-
-                var text1 = document.createElement('input');
-                text1.type = "text";
-                text1.id = "taskid";
-                text1.name = "taskid";
-                text1.placeholder = "Task ID";
-                text1.style.width = "300px";
-                div_a2.appendChild(text1);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-
-                var text2 = document.createElement('input');
-                text2.type = "text";
-                text2.id = "taskdesc";
-                text2.name = "taskdesc";
-                text2.placeholder = "Task description";
-                text2.style.width = "300px";
-                div_a2.appendChild(text2);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-
-                var text3 = document.createElement('input');
-                text3.type = "text";
-                text3.id = "projid";
-                text3.name = "projectid";
-                text3.placeholder = "Project Id";
-                text3.style.width = "300px";
-                div_a2.appendChild(text3);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-
-                var text4 = document.createElement('input');
-                text4.type = "text";
-                text4.id = "empid";
-                text4.name = "Empid";
-                text4.placeholder = "Employee Id";
-                text4.style.width = "300px";
-                div_a2.appendChild(text4);
-
-                var br = document.createElement('br');
-                div_a2.appendChild(br);
-                var br2 = document.createElement('br');
-                div_a2.appendChild(br2);
-
-                var btu1 = document.createElement('input');
-                btu1.type = "button";
-                btu1.name = "submit";
-                btu1.value = "submit";
-                btu1.style.width = "100px";
-                btu1.onclick = function () {
-                    inserttask();
-                            return false;
-                };
-                div_a2.appendChild(btu1);
-
-
-
-            }
-            ;
-            function insertproject() {
-                var projectid = document.getElementById("projectid").value;
-                var projectname = document.getElementById("projectname").value;
-                var startingdate = document.getElementById("startingdate").value;
-
-
-
-                var url = "insertproject.php?projectid=" + projectid + "&projectname=" + projectname + "&startingdate=" + startingdate;
-                xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = traiterReponse2;
-                try
-                {
-                    xhr.open("GET", url, true);
-                } catch (e)
-                {
-                    alert(e);
-                }
-                xhr.send(null);
-            }
-            function traiterReponse2()
-            {
-                if (xhr.readyState == 4) //complété
-                    if (xhr.status == 200)  //réponse OK
-                    {
-                        var reponseJSON = xhr.responseText;
-                        var rep = JSON.parse(reponseJSON);
-                        if (rep.reponse == 0) { //Aucun produit ajouté
-                            alert('insertion échouée');
-                        } else {
-                            alert('insertion réussie');
-                        }
-                    } else
-                    {
-                        alert("Problème : " + xhr.statusText);
-                    }
-            }
-            ;
-
-            function insertemployee() {
-                var employeeid = document.getElementById("employeeid").value;
-                var employeename = document.getElementById("employeename").value;
-                var startingdate = document.getElementById("startingdate").value;
-                var position = document.getElementById("position").value;
-
-
-
-
-                var url = "insertemployee.php?employeeid=" + employeeid + "&employeename=" + employeename + "&startingdate=" + startingdate + "&position=" + position;
-                xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = traiterReponse3;
-                try
-                {
-                    xhr.open("GET", url, true);
-                } catch (e)
-                {
-                    alert(e);
-                }
-                xhr.send(null);
-            }
-            ;
-            function traiterReponse3()
-            {
-                if (xhr.readyState == 4) //complété
-                    if (xhr.status == 200)  //réponse OK
-                    {
-                        var reponseJSON = xhr.responseText;
-                        var rep = JSON.parse(reponseJSON);
-                        if (rep.reponse == 0) { //Aucun produit ajouté
-                            alert('insertion échouée');
-                        } else {
-                            alert('insertion réussie');
-                        }
-                    } else
-                    {
-                        alert("Problème : " + xhr.statusText);
-                    }
-            }
-            ;
-
-
-            function inserttask() {
-                var taskid = document.getElementById("taskid").value;
-                var taskdesc = document.getElementById("taskdesc").value;
-                var projid = document.getElementById("projid").value;
-                var empid = document.getElementById("empid").value;
-
-
-
-
-                var url = "inserttask.php?taskid=" + taskid + "&taskdesc=" + taskdesc + "&projid=" + projid + "&empid=" + empid;
-                xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = traiterReponse4;
-                try
-                {
-                    xhr.open("GET", url, true);
-                } catch (e)
-                {
-                    alert(e);
-                }
-                xhr.send(null);
-            }
-            ;
-            function traiterReponse4()
-            {
-                if (xhr.readyState == 4)
-                    if (xhr.status == 200)
-                    {
-                        var reponseJSON = xhr.responseText;
-                        var rep = JSON.parse(reponseJSON);
-                        if (rep.reponse == 0) {
-                            alert('insertion échouée');
-                        } else {
-                            alert('insertion réussie');
-                        }
-                    } else
-                    {
-                        alert("Problème : " + xhr.statusText);
-                    }
-            }
-            ;
+        <div id="id01" class="modal">
+
+            <form class="modal-content animate" action="/action_page.php">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
+                </div>
+
+                <div class="container">
+                    <label for="uname"><b>Choose Task par </b></label>
+                    <select onchange ="changeMenu()" class="selectpicker" data-live-search="true" data-width="75%" >
+                        <option  data-tokens="Employee">Task By Employees</option>
+                        <option  data-tokens="project">Tasks By Projects</option>
+                        <option  data-tokens="frosting">Tasks By Status</option>
+                    </select>
+
+                    <label id="lab1"><b>Choose Employee</b></label>
+                    <label id="lab2"><b>Choose Project</b></label>
+                    <label id="lab3"><b>Choose Status</b></label>
+
+
+                    <select id="sel1"  data-live-search="true" data-width="75%" >
+                    </select>
+                    <select id="sel2"  data-live-search="true" data-width="75%" >
+                    </select>
+                    <select id="sel3" data-live-search="true" data-width="75%" >
+                    </select>
+
+                    <button type="submit">Login</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                    </label>
+                </div>
+
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn">Cancel</button>
+                    <span class="psw">Forgot <a href="#">password?</a></span>
+                </div>
+            </form>
+        </div>
+        <script src="main.js">
 
 
 

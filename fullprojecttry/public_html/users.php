@@ -3,7 +3,7 @@ try {
 	//Ouverture de la connexion à MySQL:
     $cnx = new PDO('mysql:host=localhost;dbname=db_amr', "root", "root");
 	if (!isset($_GET['username']) || !isset($_GET['pass'])) {//pas de paramètre pmin fourni dans la requete HTTP
-		$requete = 'SELECT * FROM users ';
+		$requete = 'SELECT * FROM users where 1 = 2 ';
 	}
 	else {
 		$requete = 'SELECT * FROM users WHERE USERNAME = '.$_GET['username'].' AND PASSWORD = '.$_GET['pass'];
