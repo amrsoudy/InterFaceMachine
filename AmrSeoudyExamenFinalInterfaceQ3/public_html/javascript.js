@@ -54,7 +54,7 @@ function calcul() {
 	
     var mountant = document.getElementById("nb1").value;
     var x = document.getElementById("selected");
-	var value = x.options[x.selectedIndex].value;
+    var value = x.options[x.selectedIndex].value;
 	
     var need;
 

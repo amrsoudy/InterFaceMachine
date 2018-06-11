@@ -1,5 +1,5 @@
 //for the last tab lis all tasks connection
-
+var tab =[];
 var xhr;
 function charger() {
     var url = "tasks.php?";
@@ -150,11 +150,6 @@ function openproject() {
 
 }
 ;
-
-document.getElementById("btu1").onclick = function () {
-    alert("Data Saved");
-};
-
 
 
 function openEmployee() {
@@ -392,6 +387,9 @@ function traiterReponse2()
                 alert('insertion échouée');
             } else {
                 alert('insertion réussie');
+				document.getElementById("projectid").value = "";
+				document.getElementById("projectname").value = "";
+				document.getElementById("startingdate").value ="";
             }
         } else
         {
@@ -433,6 +431,11 @@ function traiterReponse3()
                 alert('insertion échouée');
             } else {
                 alert('insertion réussie');
+		document.getElementById("employeeid").value = "";
+     document.getElementById("employeename").value = "";
+    document.getElementById("startingdate").value = "";
+    document.getElementById("position").value = "";
+				
             }
         } else
         {
@@ -473,6 +476,10 @@ function traiterReponse4()
             var rep = JSON.parse(reponseJSON);
             if (rep.reponse == 0) {
                 alert('insertion échouée');
+				 document.getElementById("taskid").value = "";
+				document.getElementById("taskdesc").value = "";
+				document.getElementById("projid").value = "";
+				document.getElementById("empid").value = "";
             } else {
                 alert('insertion réussie');
             }
@@ -482,32 +489,275 @@ function traiterReponse4()
         }
 }
 ;
-function openPar() {
+
+function openParEmployee() {
+
+
 
     document.getElementById("mainmain").innerHTML = "";
-    document.getElementById('lab1').style.display = 'none';
-    document.getElementById('lab2').style.display = 'none';
-    document.getElementById('lab3').style.display = 'none';
-    document.getElementById('sel1').style.display = 'none';
-    document.getElementById('sel2').style.display = 'none';
-    document.getElementById('sel3').style.display = 'none';
-
-
 
 
     document.getElementById('id01').style.display = 'block';
+    chargerEmp();
+}
+;
+function rempleMenu(){
+		$(".selectpicker").selectpicker('refresh');
+
+	
+    var u = document.getElementById("select");
+
+     
+    for (var i = 0; i < tab.length; i++) {
+        var op = document.createElement("option");
+        op.text = tab[i].EMPLOYEENAME;
+		//use append because if add will dupicate eash time 
+        u.appendChild(op);
+
+
+    }
+	//i must add this ligne because selectpicker need to refresh to fill all the data
+	$(".selectpicker").selectpicker('refresh');
+	
+
+}
+
+function chargerEmp() {
+    var url = "Employees.php?";
+    xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = traiterReponse7;
+    try
+    {
+        xhr.open("GET", url, true);
+    } catch (e)
+    {
+        alert(e);
+    }
+    xhr.send(null);
+}
+function traiterReponse7()
+{
+	tab = [];
+    if (xhr.readyState == 4)
+        if (xhr.status == 200)
+        {
+            var reponseJSON = xhr.responseText;
+            var reponse = JSON.parse(reponseJSON);
+            if (reponse.length == 0) {
+               alert("il ya pas chois ");
+            } else {
+				
+                
+                for (var i = 0; prod = reponse[i]; i++) {
+					
+					tab.push(prod);
+					
+                }
+                rempleMenu();
+				alert(tab);
+            }
+        } else
+        {
+            alert("Problème : " + xhr.statusText);
+        }
+}
+var need3;
+function changeEmp(g){
+
+    var k = document.getElementById(g);
+    var val = k.options[k.selectedIndex].value;
+	
+    for (var i = 0; prod = tab[i]; i++) {
+        if (prod.EMPLOYEENAME == val) {
+            need3 = prod.EMPLOYEEID;
+			
+        }
+
+
+    }
+	
+		$(".selectpicker").selectpicker('refresh');
+
+		charger6(need3);
+
+	
+}
+function charger6(x) {
+    var url = "tasksparEmployee.php?EMPLOYEEID="+x;
+	xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = traiterReponse10;
+    try
+    {
+        xhr.open("GET", url, true);
+    } catch (e)
+    {
+        alert(e);
+    }
+    xhr.send(null);
+}
+function traiterReponse10()
+{
+    if (xhr.readyState == 4)
+        if (xhr.status == 200)
+        {
+            var reponseJSON = xhr.responseText;
+            var reponse = JSON.parse(reponseJSON);
+            if (reponse.length == 0) {
+                document.getElementById("div2").innerHTML = "Aucun Tasks";
+                return;
+            } else {
+                var i, s = "<li class='list-group-item list-group-item-warning'> TASK ID" + "  - " + "TASK DESCRIPTION   " + "     -      " + "       PROJECT ID " + "     -      " + "  EMPLOYEE ID</li>";
+                ;
+                for (i = 0; prod = reponse[i]; i++) {
+                    s += "<li class='list-group-item list-group-item-warning'>" + prod.TASKID + " - " + prod.TASKDESC + " - " + prod.PROJECTID + " - " + prod.EMPLOYEEID + "</li>";
+                }
+                document.getElementById("div2").innerHTML = s;
+            }
+        } else
+        {
+            alert("Problème : " + xhr.statusText);
+        }
+}	
+		
+
+function openParProject() {
+
+    document.getElementById("mainmain").innerHTML = "";
+
+
+    document.getElementById('id02').style.display = 'block';
+    chargerProj();
 
 
 
 
 }
 ;
-function changeMenu() {
+function rempleMenu2(){
+		$(".selectpicker").selectpicker('refresh');
 
-    document.getElementById('lab1').style.display = 'block';
-    document.getElementById('sel1').className = "selectpicker";
-    document.getElementById('sel1').style.display = 'block';
+	
+    var f = document.getElementById("select2");
+
+     
+    for (var i = 0; i < tab.length; i++) {
+        var opp = document.createElement("option");
+        opp.text = tab[i].PROJECTNAME;
+		//use append because if add will dupicate eash time 
+        f.appendChild(opp);
 
 
+    }
+	//i must add this ligne because selectpicker need to refresh to fill all the data
+	$(".selectpicker").selectpicker('refresh');
 
 }
+
+function chargerProj() {
+    var url = "Project.php?";
+    xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = traiterReponse8;
+    try
+    {
+        xhr.open("GET", url, true);
+    } catch (e)
+    {
+        alert(e);
+    }
+    xhr.send(null);
+}
+function traiterReponse8()
+{
+	tab = [];
+    if (xhr.readyState == 4)
+        if (xhr.status == 200)
+        {
+            var reponseJSON = xhr.responseText;
+            var reponse = JSON.parse(reponseJSON);
+            if (reponse.length == 0) {
+               alert("il ya pas chois ");
+            } else {
+				
+                
+                for (var i = 0; prod = reponse[i]; i++) {
+					
+					tab.push(prod);
+					
+                }
+                rempleMenu2();
+				alert(tab);
+            }
+        } else
+        {
+            alert("Problème : " + xhr.statusText);
+        }
+}
+var need2;
+function changeProject(g){
+
+    var k = document.getElementById(g);
+    var val = k.options[k.selectedIndex].value;
+	
+    for (var i = 0; prod = tab[i]; i++) {
+        if (prod.PROJECTNAME == val) {
+            need2 = prod.PROJECTID;
+			
+        }
+
+
+    }
+	
+		$(".selectpicker").selectpicker('refresh');
+
+		charger5(need2);
+
+	
+}
+function charger5(x) {
+    var url = "tasksparProject.php?PROJECTID="+x;
+	xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = traiterReponse9;
+    try
+    {
+        xhr.open("GET", url, true);
+    } catch (e)
+    {
+        alert(e);
+    }
+    xhr.send(null);
+}
+function traiterReponse9()
+{
+    if (xhr.readyState == 4)
+        if (xhr.status == 200)
+        {
+            var reponseJSON = xhr.responseText;
+            var reponse = JSON.parse(reponseJSON);
+            if (reponse.length == 0) {
+                document.getElementById("div1").innerHTML = "Aucun Tasks";
+                return;
+            } else {
+                var i, s = "<li class='list-group-item list-group-item-warning'> TASK ID" + "  - " + "TASK DESCRIPTION   " + "     -      " + "       PROJECT ID " + "     -      " + "  EMPLOYEE ID</li>";
+                ;
+                for (i = 0; prod = reponse[i]; i++) {
+                    s += "<li class='list-group-item list-group-item-warning'>" + prod.TASKID + " - " + prod.TASKDESC + " - " + prod.PROJECTID + " - " + prod.EMPLOYEEID + "</li>";
+                }
+                document.getElementById("div1").innerHTML = s;
+            }
+        } else
+        {
+            alert("Problème : " + xhr.statusText);
+        }
+}	
+
+function openStatistics(){
+	 document.getElementById("mainmain").innerHTML = "<img src=\'images/photo3.jpg' width=\'1150px\' height=\'400px\'>";
+
+}
+		
+ function openpage(){
+        
+                        document.getElementsByTagName("body")[0].innerHTML = window.open("index.html", "_self");
+
+    }
+    		
