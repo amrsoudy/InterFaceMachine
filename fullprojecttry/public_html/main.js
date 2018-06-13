@@ -1,5 +1,5 @@
 //for the last tab lis all tasks connection
-var tab =[];
+var tab = [];
 var xhr;
 function charger() {
     var url = "tasks.php?";
@@ -387,9 +387,9 @@ function traiterReponse2()
                 alert('insertion échouée');
             } else {
                 alert('insertion réussie');
-				document.getElementById("projectid").value = "";
-				document.getElementById("projectname").value = "";
-				document.getElementById("startingdate").value ="";
+                document.getElementById("projectid").value = "";
+                document.getElementById("projectname").value = "";
+                document.getElementById("startingdate").value = "";
             }
         } else
         {
@@ -431,11 +431,11 @@ function traiterReponse3()
                 alert('insertion échouée');
             } else {
                 alert('insertion réussie');
-		document.getElementById("employeeid").value = "";
-     document.getElementById("employeename").value = "";
-    document.getElementById("startingdate").value = "";
-    document.getElementById("position").value = "";
-				
+                document.getElementById("employeeid").value = "";
+                document.getElementById("employeename").value = "";
+                document.getElementById("startingdate").value = "";
+                document.getElementById("position").value = "";
+
             }
         } else
         {
@@ -476,12 +476,13 @@ function traiterReponse4()
             var rep = JSON.parse(reponseJSON);
             if (rep.reponse == 0) {
                 alert('insertion échouée');
-				 document.getElementById("taskid").value = "";
-				document.getElementById("taskdesc").value = "";
-				document.getElementById("projid").value = "";
-				document.getElementById("empid").value = "";
+
             } else {
                 alert('insertion réussie');
+                document.getElementById("taskid").value = "";
+                document.getElementById("taskdesc").value = "";
+                document.getElementById("projid").value = "";
+                document.getElementById("empid").value = "";
             }
         } else
         {
@@ -501,24 +502,24 @@ function openParEmployee() {
     chargerEmp();
 }
 ;
-function rempleMenu(){
-		$(".selectpicker").selectpicker('refresh');
+function rempleMenu() {
+    $(".selectpicker").selectpicker('refresh');
 
-	
+
     var u = document.getElementById("select");
 
-     
+
     for (var i = 0; i < tab.length; i++) {
         var op = document.createElement("option");
         op.text = tab[i].EMPLOYEENAME;
-		//use append because if add will dupicate eash time 
+        //use append because if add will dupicate eash time 
         u.appendChild(op);
 
 
     }
-	//i must add this ligne because selectpicker need to refresh to fill all the data
-	$(".selectpicker").selectpicker('refresh');
-	
+    //i must add this ligne because selectpicker need to refresh to fill all the data
+    $(".selectpicker").selectpicker('refresh');
+
 
 }
 
@@ -537,24 +538,24 @@ function chargerEmp() {
 }
 function traiterReponse7()
 {
-	tab = [];
+    tab = [];
     if (xhr.readyState == 4)
         if (xhr.status == 200)
         {
             var reponseJSON = xhr.responseText;
             var reponse = JSON.parse(reponseJSON);
             if (reponse.length == 0) {
-               alert("il ya pas chois ");
+                alert("il ya pas chois ");
             } else {
-				
-                
+
+
                 for (var i = 0; prod = reponse[i]; i++) {
-					
-					tab.push(prod);
-					
+
+                    tab.push(prod);
+
                 }
                 rempleMenu();
-				alert(tab);
+                alert(tab);
             }
         } else
         {
@@ -562,29 +563,29 @@ function traiterReponse7()
         }
 }
 var need3;
-function changeEmp(g){
+function changeEmp(g) {
 
     var k = document.getElementById(g);
     var val = k.options[k.selectedIndex].value;
-	
+
     for (var i = 0; prod = tab[i]; i++) {
         if (prod.EMPLOYEENAME == val) {
             need3 = prod.EMPLOYEEID;
-			
+
         }
 
 
     }
-	
-		$(".selectpicker").selectpicker('refresh');
 
-		charger6(need3);
+    $(".selectpicker").selectpicker('refresh');
 
-	
+    charger6(need3);
+
+
 }
 function charger6(x) {
-    var url = "tasksparEmployee.php?EMPLOYEEID="+x;
-	xhr = new XMLHttpRequest();
+    var url = "tasksparEmployee.php?EMPLOYEEID=" + x;
+    xhr = new XMLHttpRequest();
     xhr.onreadystatechange = traiterReponse10;
     try
     {
@@ -617,8 +618,8 @@ function traiterReponse10()
         {
             alert("Problème : " + xhr.statusText);
         }
-}	
-		
+}
+
 
 function openParProject() {
 
@@ -633,23 +634,23 @@ function openParProject() {
 
 }
 ;
-function rempleMenu2(){
-		$(".selectpicker").selectpicker('refresh');
+function rempleMenu2() {
+    $(".selectpicker").selectpicker('refresh');
 
-	
+
     var f = document.getElementById("select2");
 
-     
+
     for (var i = 0; i < tab.length; i++) {
         var opp = document.createElement("option");
         opp.text = tab[i].PROJECTNAME;
-		//use append because if add will dupicate eash time 
+        //use append because if add will dupicate eash time 
         f.appendChild(opp);
 
 
     }
-	//i must add this ligne because selectpicker need to refresh to fill all the data
-	$(".selectpicker").selectpicker('refresh');
+    //i must add this ligne because selectpicker need to refresh to fill all the data
+    $(".selectpicker").selectpicker('refresh');
 
 }
 
@@ -668,24 +669,24 @@ function chargerProj() {
 }
 function traiterReponse8()
 {
-	tab = [];
+    tab = [];
     if (xhr.readyState == 4)
         if (xhr.status == 200)
         {
             var reponseJSON = xhr.responseText;
             var reponse = JSON.parse(reponseJSON);
             if (reponse.length == 0) {
-               alert("il ya pas chois ");
+                alert("il ya pas chois ");
             } else {
-				
-                
+
+
                 for (var i = 0; prod = reponse[i]; i++) {
-					
-					tab.push(prod);
-					
+
+                    tab.push(prod);
+
                 }
                 rempleMenu2();
-				alert(tab);
+                alert(tab);
             }
         } else
         {
@@ -693,29 +694,29 @@ function traiterReponse8()
         }
 }
 var need2;
-function changeProject(g){
+function changeProject(g) {
 
     var k = document.getElementById(g);
     var val = k.options[k.selectedIndex].value;
-	
+
     for (var i = 0; prod = tab[i]; i++) {
         if (prod.PROJECTNAME == val) {
             need2 = prod.PROJECTID;
-			
+
         }
 
 
     }
-	
-		$(".selectpicker").selectpicker('refresh');
 
-		charger5(need2);
+    $(".selectpicker").selectpicker('refresh');
 
-	
+    charger5(need2);
+
+
 }
 function charger5(x) {
-    var url = "tasksparProject.php?PROJECTID="+x;
-	xhr = new XMLHttpRequest();
+    var url = "tasksparProject.php?PROJECTID=" + x;
+    xhr = new XMLHttpRequest();
     xhr.onreadystatechange = traiterReponse9;
     try
     {
@@ -748,16 +749,16 @@ function traiterReponse9()
         {
             alert("Problème : " + xhr.statusText);
         }
-}	
+}
 
-function openStatistics(){
-	 document.getElementById("mainmain").innerHTML = "<img src=\'images/photo3.jpg' width=\'1150px\' height=\'400px\'>";
+function openStatistics() {
+    document.getElementById("mainmain").innerHTML = "<img src=\'images/photo3.jpg' width=\'1150px\' height=\'400px\'>";
 
 }
-		
- function openpage(){
-        
-                        document.getElementsByTagName("body")[0].innerHTML = window.open("index.html", "_self");
 
-    }
-    		
+function openpage() {
+
+    document.getElementsByTagName("body")[0].innerHTML = window.open("index.html", "_self");
+
+}
+
